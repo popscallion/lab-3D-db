@@ -1,9 +1,11 @@
 import React, {lazy, Suspense, useContext, useEffect, useState, useMemo} from 'react';
 import styled from 'styled-components';
 import { Button, Link, Box, Flex, Image } from 'rebass/styled-components'
-import {MDXProvider} from '@mdx-js/react'
 import { SetIdContext, IdContext, NodeContext, SetHoverContext } from '../Viewer'
 import { throttle, debounce } from "lodash";
+import Markdown from 'markdown-to-jsx'
+import data from '../data/allLists'
+
 
 
 
@@ -22,9 +24,9 @@ const Info = ({show, handler}) => {
 
   const LinkCatcher=(props)=>{
     return(
-      <span onMouseEnter={()=>{setDebounceState(true);setHover(props.href)}} onMouseLeave={()=>{setDebounceState(false)}}>
+      <span onMouseEnter={()=>{setDebounceState(true);setHover(props.href.replace('#',''))}} onMouseLeave={()=>{setDebounceState(false)}}>
         <Link sx={{color:'blue'}}
-        onClick={()=> {setSpecimen(props.href); console.log(specimen)}}
+        onClick={()=> {setSpecimen(props.href.replace('#','')); console.log(specimen)}}
         style={{fontWeight:'bold', cursor:'pointer'}} >{props.children}</Link>
       </span>
     )
@@ -34,20 +36,13 @@ const Info = ({show, handler}) => {
     a:LinkCatcher
   }
 
-  const Content = lazy(() => import('!babel-loader!mdx-loader!'+'../data/nodes/'+node+'.mdx'))
-  // const Content = lazy(() => importMDX('../data/nodes/5-1-reptiliomorpha.mdx'))
+  const Content = data.content[node].md
   return useMemo (()=> {
     return (
-      <MDXProvider components={components}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Content />
-        </Suspense>
-      </MDXProvider>
+      <Markdown options={{overrides:{a:{component:LinkCatcher}}}}>
+        {Content}
+      </Markdown>
       )
     }, [node])
 }
-
 export default Info;
-
-
-// ()=>setId(props.href)
