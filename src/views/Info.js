@@ -1,10 +1,9 @@
 import React, {lazy, Suspense, useContext, useEffect, useState, useMemo} from 'react';
 import styled from 'styled-components';
 import { Button, Link, Box, Flex, Image } from 'rebass/styled-components'
-import { SetIdContext, IdContext, NodeContext, SetHoverContext } from '../Viewer'
+import { DataContext, SetIdContext, IdContext, NodeContext, SetHoverContext } from '../Viewer'
 import { debounce } from "lodash";
 import Markdown from 'markdown-to-jsx'
-import data from '../data/allLists'
 
 const MarkdownWrapper = styled(Box)`
   & h1,h2,h3 {
@@ -57,6 +56,7 @@ const DropDown = styled(Box)`
 
 
 const Info = ({show, handler}) => {
+  const data = useContext(DataContext)
   const specimen = useContext(IdContext)
   const setSpecimen = useContext(SetIdContext)
   const node = useContext(NodeContext)

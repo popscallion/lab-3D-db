@@ -1,8 +1,7 @@
 import React, {useContext, useMemo, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Box, Image } from 'rebass/styled-components'
-import { HoverContext } from '../Viewer'
-import data from '../data/allLists'
+import { DataContext, HoverContext } from '../Viewer'
 
 
 const imgSz = 128
@@ -15,6 +14,7 @@ const ThumbBox = styled(Box)`
 
 
 const Thumb = (props) => {
+  const data = useContext(DataContext)
   const hoverId = useContext(HoverContext)
   const hover = data.specimens[hoverId]
   const show = props.show

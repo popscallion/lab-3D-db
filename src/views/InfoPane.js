@@ -2,9 +2,8 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {Box, Flex, Text} from 'rebass/styled-components';
 import {Label, Select} from '@rebass/forms'
-import { LabContext, SetLabContext, NodeContext, SetNodeContext } from '../Viewer'
+import { DataContext, LabContext, SetLabContext, NodeContext, SetNodeContext } from '../Viewer'
 import Info from './Info';
-import data from '../data/allLists'
 import courseInfo from '../data/courseInfo'
 import Thumb from './Thumb'
 import Credits from './Credits'
@@ -63,6 +62,7 @@ const InfoBox = styled(Box)`
 `
 
 const InfoPane = () => {
+  const data = useContext(DataContext)
   const lab = useContext(LabContext)
   const setLab = useContext(SetLabContext)
   const node = useContext(NodeContext)

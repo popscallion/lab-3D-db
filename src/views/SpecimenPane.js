@@ -2,11 +2,10 @@ import React, {useContext, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {Box, Flex, Image} from 'rebass/styled-components';
 import ReactPlayer from 'react-player'
-import { IdContext } from '../Viewer'
+import { DataContext, IdContext } from '../Viewer'
 import SketchFabViewer from './SketchFabViewer';
 import MetaData from './MetaData';
 import watermark from '../assets/watermark.png'
-import data from '../data/allLists'
 
 
 
@@ -66,6 +65,7 @@ const Watermark = (props) => {
 
 
 const SpecimenPane = () => {
+  const data = useContext(DataContext)
   const specimenId = useContext(IdContext)
   const specimen = data.specimens[specimenId]
   console.log(specimen);

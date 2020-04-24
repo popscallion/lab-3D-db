@@ -3,10 +3,7 @@ import Modal from 'styled-react-modal'
 import { ModalProvider } from 'styled-react-modal'
 import {ReactComponent as Icon} from '../assets/tree-icon.svg'
 import PhyloCanvas from './PhyloCanvas';
-import { LabContext } from '../Viewer';
-import data from '../data/allLists'
-
-
+import { DataContext, LabContext } from '../Viewer';
 
 
 const TreeModal = Modal.styled`
@@ -21,6 +18,7 @@ const TreeModal = Modal.styled`
 
 
 const Tree = (props) => {
+  const data = useContext(DataContext)
   const lab = useContext(LabContext);
   const [show, setShow] = useState(false);
   const [tree, setTree] = useState(data.labs[lab].tree);
