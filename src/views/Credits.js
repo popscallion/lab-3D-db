@@ -5,7 +5,7 @@ import Infosvg from "../assets/info.svg"
 
 const CreditsFlex = styled(Flex)`
   flex-direction: row;
-  height: 80px;
+  height: 120px;
   align-items: center;
 `
 
@@ -15,10 +15,10 @@ const CreditsText = props =>
       sx={{
         margin: '0px 8px',
         fontFamily: 'Cabin',
-        fontSize: '13px',
+        fontSize: '11px',
         color: 'ochre',
         '> strong':{
-          fontSize: '11px',
+          fontSize: '10px',
           letterSpacing: '0.25px',
           textTransform: 'uppercase',
           color: 'blue'
@@ -44,11 +44,9 @@ const CreditsIcon = props =>
 
 
 export default function Credits(props){
+  const {instructor, text, development} = props.data.people
+  const support = props.data.support
   const [hover, setHover] = useState(false)
-
-  useEffect(()=>{
-    console.log('hover: '+props.data.instructor);
-  },[hover])
   return (
     <CreditsFlex>
       <CreditsIcon
@@ -56,7 +54,11 @@ export default function Credits(props){
         onMouseEnter={()=>{setHover(true)}}
         onMouseLeave={()=>{setHover(false)}} />
       {hover
-        ? <TextFlex><CreditsText><strong>Instructor:{'\u00A0'}{'\u00A0'}</strong>{props.data.instructor}</CreditsText><CreditsText><strong>Original text:{'\u00A0'}{'\u00A0'}</strong>{props.data.text}</CreditsText></TextFlex>
+        ? <TextFlex><CreditsText><strong>Instructor:{'\u00A0'}{'\u00A0'}</strong>{instructor}</CreditsText>
+        <CreditsText><strong>Original text:{'\u00A0'}{'\u00A0'}</strong>{text}</CreditsText>
+        <CreditsText><strong>Development:{'\u00A0'}{'\u00A0'}</strong>{development}</CreditsText>
+        <CreditsText><strong>Supported by:{'\u00A0'}{'\u00A0'}</strong>{support}</CreditsText>
+        </TextFlex>
         : <></>  }
     </CreditsFlex>
   )

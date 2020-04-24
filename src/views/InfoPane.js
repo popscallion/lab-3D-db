@@ -105,7 +105,7 @@ const InfoPane = () => {
           <Info show={show} handler={setShow}/>
           <Thumb show={show}/>
       </InfoBox>
-      <Credits data={courseInfo.people}/>
+      <Credits data={courseInfo}/>
     </Pane>
   )
 }
